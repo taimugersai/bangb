@@ -279,7 +279,10 @@
 					"fonts/mui.ttf",
 					"css/style.css",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/common.js",
+					"images/logo.png",
+					"css/common.css"
 				],
 				"refer": [
 					"html/login.html",
@@ -300,7 +303,10 @@
 					"js/mui.min.js",
 					"css/mui.min.css",
 					"select.html",
-					"html/forget_password.html"
+					"html/forget_password.html",
+					"css/common.css",
+					"js/common.js",
+					"images/logo.png"
 				],
 				"refer": [
 					"html/main.html",

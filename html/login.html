@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<title></title>
+		<title id='title'></title>
 		<script src="../js/common.js"></script>
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link href="../css/common.css" rel="stylesheet" />
@@ -61,7 +61,7 @@
 				border-top:1px solid #cccccc;
 				
 			}
-			.link-area a{
+			.link-area div{
 				display: inline-block;
 				width: 50%;
 				height: 0.75rem;
@@ -71,7 +71,7 @@
 				font-size: 0.28rem;
 				color: #FF5556;
 			}
-			.link-area a:nth-child(1){
+			.link-area div:nth-child(1){
 				border-right: 1px solid #CCCCCC;
 			}
 			
@@ -198,8 +198,8 @@
 					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
 
 					<div class="link-area">
-						<a id='reg'>注册账号</a> 
-						<a id='forgetPassword' href="forget_password.html">忘记密码</a>
+						<div id='reg'>注册账号</div> 
+						<div id='forgetPassword' href="forget_password.html">忘记密码</div>
 					</div>
 				</form>
 				
@@ -222,6 +222,7 @@
 					var password = doc.getElementById('password');
 					var login = doc.getElementById('login');
 					var register = doc.getElementById('reg');
+					var forgetPassword = doc.getElementById('forgetPassword');
 					var title=doc.getElementById('title');
 					var type = plus.webview.currentWebview().type;
 					title.innerText=type == 0 ?'招聘登录':'兼职登录';
@@ -257,6 +258,15 @@
 						$.openWindow({
 							url: '/html/reg.html',
 							id: 'reg',
+							extras: {
+								type: type
+							}
+						});
+					});
+					forgetPassword.addEventListener('tap', function(event) {
+						$.openWindow({
+							url: 'forget_password.html',
+							id: 'forget_password',
 							extras: {
 								type: type
 							}
