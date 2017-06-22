@@ -57,8 +57,22 @@
 			
 			.link-area {
 				display: block;
-				margin-top: 25px;
 				text-align: center;
+				border-top:1px solid #cccccc;
+				
+			}
+			.link-area a{
+				display: inline-block;
+				width: 50%;
+				height: 0.75rem;
+				float:left;
+				text-align: center;
+				line-height: 0.75rem;
+				font-size: 0.28rem;
+				color: #FF5556;
+			}
+			.link-area a:nth-child(1){
+				border-right: 1px solid #CCCCCC;
 			}
 			
 			.spliter {
@@ -156,8 +170,10 @@
 			width: 6.45rem;
 			margin-left: 0.31rem;
 			margin-top: 0.47rem;
+			margin-bottom: 0.53rem;
 			background: #ff5556;
 			border: 1px solid #ff5556;
+			
 		}
 		</style>
 
@@ -180,8 +196,9 @@
 						<input type="password" class="mui-input-password mui-input" placeholder="请输入密码" id='password'>
 					</div>
 					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+
 					<div class="link-area">
-						<a id='reg'>注册账号</a> <span class="spliter">|</span>
+						<a id='reg'>注册账号</a> 
 						<a id='forgetPassword' href="forget_password.html">忘记密码</a>
 					</div>
 				</form>
