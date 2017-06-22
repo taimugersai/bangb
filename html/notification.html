@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style type="text/css">
+			.content {
+				position: absolute;
+				color: #6d6d72;
+				width: 100%;
+				top: 47px
+			}
+			
+			.mui-content {
+				padding: 10px;
+				background-color: #fff;
+			}
+			
+			.radio {
+				line-height: 40px;
+			}
+			
+			.mui-btn {
+				width: 80%;
+				margin: auto;
+				margin-top: 50px;
+				;
+			}
+			
+			.title {
+				line-height: 40px;
+				text-align: center;
+				font-size: 20px;
+			}
+			
+			.rule {
+				position: relative;
+				width: 100%;
+				height: 100px;
+			}
+			
+			.tit {
+				float: left;
+				padding: 11px 15px;
+				width: 35%
+			}
+			
+			.text {
+				float: left;
+				padding-left: 15px;
+				width: 60%;
+				height: 150px;
+				word-wrap: break-word;
+				word-break: normal;
+				overflow-y: auto;
+			}
+			
+			div span {
+				padding-top: 10px;
+				padding-left: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">消息</h1>
+		</header>
+		<div class="content">
+			<div class="mui-content">
+				<div class="title">
+					<span id='title'></span>
+				</div>
+				<div class="mui-table-view-cell">
+					<label>日期</label>
+					<span id='date'> </span>
+				</div>
+				<div class="mui-table-view-cell">
+					<label>作者</label>
+					<span id='sender'></span>
+				</div>
+				<div class="mui-table-view-cell">
+					<label>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					<span id='content'></span>
+				</div>
+			</div>
+			<button type="button" class="mui-btn mui-btn-blue mui-btn-block" id='sign' style="display: none;">报名链接</button>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/app.js"></script>
+	<script>
+		mui.init({
+			swipeBack: true //启用右滑关闭功能
+		});
+		(function($, doc) {
+			$.plusReady(function() {
+				var notification = plus.webview.currentWebview().notification;
+				var title = doc.getElementById('title');
+				var date = doc.getElementById('date');
+				var sender = doc.getElementById('sender');
+				var content = doc.getElementById('content');
+				var sign=doc.getElementById('sign');
+				var type=localStorage.getItem('type');
+				title.innerText = notification.title;
+				date.innerText = notification.date;
+				sender.innerText = notification.sender;
+				content.innerText = notification.content;
+				if(type==1&&notification.task_id!=null&&notification.task_id!=0)
+				{sign.style.display='block';
+				sign.addEventListener('tap',function(){
+                    $.openWindow({
+                        url: 'information.html',
+                        id: 'information',
+                        extras: {
+                            id:notification.task_id
+                        }
+                    });
+				});
+				}
+			});
+		}(mui, document));
+	</script>
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/app.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/app.js"></script>
+		<style type="text/css">
+			.content {
+				margin-top: 50px
+			}
+			
+			.radio {
+				line-height: 40px;
+			}
+			
+			.fabu {
+				width: 80%;
+				margin: auto;
+				margin-top: 25px;
+				margin-bottom: 25px;
+			}
+			
+			#info {
+				padding: 20px 10px;
+			}
+			
+			.mui-input-row .mui-btn {
+				width: 63.7%;
+				height: 99%;
+				padding: 0;
+			}
+			
+			.data {
+				border: none;
+				font-size: 16px;
+			}
+			
+			.ui-alert {
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+			}
+			
+			.mui-input-group .textarea {
+				height: 100px
+			}
+			
+			.mui-input-row label {
+				width: 42%
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 58%;
+			}
+			
+			.mui-input-row .category {
+				width: 58%;
+				height: 100%;
+				border: none;
+				padding: 0;
+			}
+			
+			#userResult {
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+			}
+			#type{
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">发布</h1>
+		</div>
+		<div class="content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>标题</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入内容" id="title">
+				</div>
+				<div class="mui-input-row">
+					<label>兼职类型</label>
+						<a id='type' class="btn mui-btn mui-btn-block data category">
+						</a>
+				</div>
+				<div class="mui-input-row">
+					<label>截止日期</label>
+					<a id='demo1' class="btn mui-btn mui-btn-block data category">
+						<div id='result1' class="ui-alert"></div>
+					</a>
+				</div>
+				<div class="mui-input-row">
+					<label>薪资</label>
+					<input type="text" class="mui-input-clear" placeholder="元/天" id="salary">
+				</div>
+				<div class="mui-input-row">
+					<label>需求人数</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入内容" id="demand_count">
+				</div>
+				<div class="mui-input-row">
+					<label>需求性别</label>
+					<div class="radio">
+						<input name="gender" type="radio" value="male" checked="">男
+						<input name="gender" type="radio" value="female">女
+						<input name="gender" type="radio" value="other">不限
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label>兼职地点</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入内容" id="address">
+				</div>
+				<div class="mui-input-row">
+					<label>开始时间</label>
+					<a id='demo2' class="btn mui-btn mui-btn-block data category">
+						<div id='result2' class="ui-alert"></div>
+					</a>
+				</div>
+				<div class="mui-input-row">
+					<label>持续时间</label>
+					<input type="text" class="mui-input-clear" placeholder="工作的天数,不填为长期" id="work_time">
+				</div>
+				<div class="mui-input-row textarea" style="background-color: #fff;">
+					<label>岗位描述</label>
+					<textarea rows="3" placeholder="请输入内容" id="description"></textarea>
+				</div>
+
+				<div class="mui-input-row textarea" style="background-color: #fff;">
+					<label>任职要求</label>
+					<textarea rows="3" placeholder="请输入内容" id="demand_skill"></textarea>
+				</div>
+			</form>
+			<button type="button" class="fabu mui-btn mui-btn-blue mui-btn-block" id="confirm">发布</button>
+		</div>
+
+		<script>
+			var vendor,type,tag;
+            window.addEventListener('tags', function (event) {
+                var tags = event.detail.tags;
+                if (tags != null) {
+                    var types = '';
+                    tag='';
+                    tags.forEach(function (value, index, array) {
+                        types += value.name + ' ';
+                        tag+=value.slug+',';
+                    });
+                    type.innerText = types;
+                }
+            });
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					var data = new Array();
+                    type=doc.getElementById('type');
+                    type.addEventListener('tap',function () {
+                        mui.openWindow({
+                            url: 'tags_main.html',
+                            id: 'tags_main',
+                            show: {
+                                aniShow: 'pop-in'
+                            }
+                        });
+                    });
+					var result1 = $('#result1')[0];
+					var result2 = $('#result2')[0];
+					doc.getElementById('demo1').addEventListener('tap', function() {
+                        var optionsJson = this.getAttribute('data-options') || '{}';
+                        var options = JSON.parse(optionsJson);
+                        var id = this.getAttribute('id');
+                        var myDate = new Date();
+                        var beginDate = myDate.getFullYear() ;
+                        var endDate = myDate.getFullYear()+1 ;
+                        var picker = new mui.DtPicker({
+                            type: "date", //设置日历初始视图模式
+                            beginYear: beginDate, //设置开始日期
+                            endYear: endDate //设置结束日期
+                        });
+                        picker.show(function(rs) {
+                                result1.innerText = rs.text;
+                            picker.dispose();
+
+                        });
+                    }, false);
+                    doc.getElementById('demo2').addEventListener('tap', function() {
+                        var optionsJson = this.getAttribute('data-options') || '{}';
+                        var options = JSON.parse(optionsJson);
+                        var id = this.getAttribute('id');
+                        var myDate = new Date();
+                        var beginDate = myDate.getFullYear() ;
+                        var endDate = myDate.getFullYear()+1 ;
+                        var picker = new mui.DtPicker({
+                            type: "date", //设置日历初始视图模式
+                            beginYear: beginDate, //设置开始日期
+                            endYear: endDate //设置结束日期
+                        });
+                        picker.show(function(rs) {
+                            result2.innerText = rs.text;
+                            picker.dispose();
+
+                        });
+                    }, false);
+					var confirm = doc.getElementById("confirm");
+					var genders = doc.getElementsByName('gender');
+					var gender;
+					confirm.addEventListener('tap', function() {
+						for(var i = 0; i < genders.length; i++) {
+							if(genders[i].checked == true) {
+								gender = genders[i].value;
+							}
+						}
+						var title = doc.getElementById('title');
+						var end_date = doc.getElementById('result1');
+						var salary = doc.getElementById('salary');
+						var demand_count = doc.getElementById('demand_count');
+						var address = doc.getElementById('address');
+						var begin_date = doc.getElementById('result2');
+						var description = doc.getElementById('description');
+						var demand_skill = doc.getElementById('demand_skill');
+						var work_time=doc.getElementById('work_time');
+						var task = {
+							title: title.value,
+							tag: tag,
+							end_date: end_date.innerText,
+							salary: salary.value,
+							demand_count: demand_count.value,
+							gender: gender,
+							address: address.value,
+							begin_date: begin_date.innerText,
+							description: description.value,
+							demand_skill: demand_skill.value,
+							work_time:work_time.value
+						};
+						app.createTask(task, function(err) {
+							if(err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.toast('发布成功');
+							$.fire(vendor, 'refresh_task');
+							$.back();
+						});
+					});
+				});
+				$.plusReady(function() {
+					plus.webview.currentWebview().setStyle({
+						scrollIndicator: 'none'
+					});
+					vendor = plus.webview.getWebviewById('task_vendor.html');
+				});
+			})(mui, document);
+		</script>
+	</body>
+
+</html>

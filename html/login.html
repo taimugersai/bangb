@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/common.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/common.css" rel="stylesheet" />
+		<style>
+			.ui-page-login,
+			body {
+				width: 100%;
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.area {
+				margin: 20px auto 0px auto;
+			}
+			
+			.mui-input-group {
+				margin-top: -1.23rem;
+				margin-left: 0.21rem;
+				width:7.08rem;
+				height: 5.93rem;
+			}
+			
+			.mui-input-group:first-child {
+				margin-top: 20px;
+			}
+			
+			.mui-input-group label {
+				width: 30%;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 70%;
+			}
+			
+			.mui-checkbox input[type=checkbox],
+			.mui-radio input[type=radio] {
+				top: 6px;
+			}
+			
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			
+			.mui-btn {
+				padding: 10px;
+			}
+			
+			.link-area {
+				display: block;
+				margin-top: 25px;
+				text-align: center;
+			}
+			
+			.spliter {
+				color: #bbb;
+				padding: 0px 8px;
+			}
+			
+			.oauth-area {
+				position: absolute;
+				bottom: 20px;
+				left: 0px;
+				text-align: center;
+				width: 100%;
+				padding: 0px;
+				margin: 0px;
+			}
+			
+			.oauth-area .oauth-btn {
+				display: inline-block;
+				width: 50px;
+				height: 50px;
+				background-size: 30px 30px;
+				background-position: center center;
+				background-repeat: no-repeat;
+				margin: 0px 20px;
+				/*-webkit-filter: grayscale(100%); */
+				border: solid 1px #ddd;
+				border-radius: 25px;
+			}
+			
+			.oauth-area .oauth-btn:active {
+				border: solid 1px #aaa;
+			}
+			
+			.oauth-area .oauth-btn.disabled {
+				background-color: #ddd;
+			}
+			
+			#logo {
+				position: relative;
+				width: 128px;
+				height: 128px;
+				margin: auto;
+				margin-top: 25px;
+				;
+			}
+			.content {
+			position: absolute;
+			width: 100%;
+			height: 100vh;
+			margin: 0 auto;
+			background: #ffffff;
+		}
+		.logo_box{
+			width: 7.5rem;
+			height: 5.9rem;
+			background: #FF5556;
+			padding-top: 2.13rem;
+		}
+		.logo_box div{
+			width: 1.83rem;
+			height: 1.83rem;
+			margin-left: 2.81rem;
+			background: #FFFFFF;
+			background-image: url(../images/logo.png);
+			background-size: 80% 80%; 
+			background-repeat:no-repeat;
+			border-radius: 6px;
+		}
+		.mui-input-row{
+			width: 6.44rem;
+			height: 0.92rem!important;
+			background: #f8f8f8!important;
+			margin-left: 0.32rem;
+			margin-top: 0.44rem;
+		}
+		.iconfont{
+			position: absolute;
+			top:0.25rem;
+			left: 0.5rem;
+		}
+		.mui-input{
+			padding-left: 1.09rem!important;
+			font-size: 0.2rem;
+		}
+		.mui-icon-eye:before {
+		    content: '&#xe620';
+		    font-family: iconfont;
+		}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="logo_box">
+				<div></div>
+			</div>
+			<form id='login-form' class="mui-input-group">
+				<div class="clear" style="height: 0.5rem;"></div>
+				<div class="mui-input-row">
+					<span class="iconfont">&#xe68d;</span>
+					<input id='account' type="text" class="mui-input-clear mui-input" placeholder="请输入手机号">
+				</div>
+				<form class="mui-input-group">
+					<div class="mui-input-row">
+						<span class="iconfont">&#xe616;</span>
+						<input type="password" class="mui-input-password mui-input" placeholder="请输入密码" id='password'>
+					</div>
+				</form>
+				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<div class="link-area">
+					<a id='reg'>注册账号</a> <span class="spliter">|</span>
+					<a id='forgetPassword' href="forget_password.html">忘记密码</a>
+				</div>
+			</form>
+			
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.enterfocus.js"></script>
+		<script src="../js/app.js"></script>
+		<script>
+            window.addEventListener('close',function(){
+                plus.webview.currentWebview().close();
+            });
+			(function($, doc) {
+				$.init({
+					statusBarBackground: '#f7f7f7'
+				});
+				$.plusReady(function() {
+					var account = doc.getElementById('account');
+					var password = doc.getElementById('password');
+					var login = doc.getElementById('login');
+					var register = doc.getElementById('reg');
+					var title=doc.getElementById('title');
+					var type = plus.webview.currentWebview().type;
+					title.innerText=type == 0 ?'招聘登录':'兼职登录';
+					login.addEventListener('tap', function(event) {
+						var loginInfo = {
+							account: account.value,
+							password: password.value,
+							type: type
+						};
+						app.login(loginInfo, function(err) {
+							if(err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+							plus.nativeUI.toast('登录成功');
+							var type = localStorage.getItem('type');
+							var token = localStorage.getItem('token');
+							var id = localStorage.getItem('id');					
+							app.getUser(type, token, id, function() {
+								mui.openWindow({
+									url: '/html/tab-webview-main.html',
+									id: localStorage.getItem('type') == 0 ? 'vendor' : 'clerk',
+									show: {
+										aniShow: 'pop-in'
+									}
+								});
+							}, function() {
+
+							});
+						});
+					});
+					register.addEventListener('tap', function(event) {
+						$.openWindow({
+							url: '/html/reg.html',
+							id: 'reg',
+							extras: {
+								type: type
+							}
+						});
+					});
+				});
+			}(mui, document));
+		</script>
+	</body>
+
+</html>

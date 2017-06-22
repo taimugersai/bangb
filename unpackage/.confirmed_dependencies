@@ -1,0 +1,503 @@
+{
+  "index.html": {
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "css/style_index.css",
+      "html/country.html",
+      "html/admin.html",
+      "/js/mui.min.js",
+      "js/app.js"
+    ],
+    "refer": [
+      "html/reg.html",
+      "select.html",
+      "html/tabbar_c.html",
+      "html/tabbar_ad.html",
+      "html/tab-webview-main.html"
+    ]
+  },
+  "html/country.html": {
+    "resources": [
+      "index.html",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/app.js",
+      "css/common.css"
+    ],
+    "refer": [
+      "index.html",
+      "html/tabbar_c.html"
+    ]
+  },
+  "html/admin.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "js/mui.poppicker.js",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/city.data-3.js",
+      "fonts/mui.ttf",
+      "html/tabbar_ad.html",
+      "index.html",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/app.js",
+      "css/common.css"
+    ],
+    "refer": [
+      "html/tabbar_ad.html",
+      "html/tabbar_c.html"
+    ]
+  },
+  "html/tabbar_ad.html": {
+    "resources": [
+      "js/iconfont.js",
+      "images/new.png",
+      "css/app.css",
+      "css/iconfont.css",
+      "images/hot.png",
+      "fonts/iconfont.ttf",
+      "html/admin.html",
+      "images/bg.jpg",
+      "images/iconfont-tianjia.png",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/app.js",
+      "html/information.html",
+      "js/mui.picker.min.js",
+      "js/mui.poppicker.js",
+      "html/search.html",
+      "html/change_password.html",
+      "html/pullrefresh_main.html",
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js"
+    ],
+    "refer": [
+      "html/admin.html",
+      "select.html",
+      "html/search.html",
+      "html/information.html",
+      "html/notification.html",
+      "html/change_password.html",
+      "html/pullrefresh_main.html"
+    ]
+  },
+  "html/reg.html": {
+    "resources": [
+      "js/app.js",
+      "fonts/mui.ttf",
+      "css/style.css",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/login.html",
+      "html/admin.html",
+      "html/country.html",
+      "html/clerk.html",
+      "html/create_clerk.html",
+      "html/create_vendor.html"
+    ]
+  },
+  "html/login.html": {
+    "resources": [
+      "js/mui.enterfocus.js",
+      "images/iconfont-tianjia.png",
+      "fonts/mui.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "select.html",
+      "html/forget_password.html"
+    ],
+    "refer": [
+      "html/main.html",
+      "html/tabbar_ad.html",
+      "html/tabbar_c.html",
+      "html/reg.html",
+      "html/forget_password.html",
+      "html/tab-webview-main.html"
+    ]
+  },
+  "html/tabbar_c.html": {
+    "resources": [
+      "js/iconfont.js",
+      "css/app.css",
+      "css/iconfont.css",
+      "fonts/iconfont.ttf",
+      "images/bg.jpg",
+      "images/iconfont-tianjia.png",
+      "html/fabu.html",
+      "html/information.html",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/app.js",
+      "images/new.png",
+      "html/change_password.html"
+    ],
+    "refer": [
+      "html/fabu.html",
+      "select.html",
+      "html/information.html",
+      "html/country.html",
+      "html/notification.html"
+    ]
+  },
+  "html/fabu.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "css/mui.picker.min.css",
+      "html/tabbar_c.html",
+      "js/mui.min.js",
+      "css/app.css",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "js/app.js",
+      "js/mui.poppicker.js"
+    ],
+    "refer": [
+      "html/tabbar_c.html",
+      "html/tab-webview-main.html",
+      "html/tags_main.html"
+    ]
+  },
+  "select.html": {
+    "resources": [
+      "css/style_index.css",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/common.js",
+      "images/bg.jpg",
+      "images/logo.png"
+    ],
+    "refer": [
+      "html/reg.html",
+      "html/login.html"
+    ]
+  },
+  "html/information.html": {
+    "resources": [
+      "html/tabbar_c.html",
+      "fonts/mui.ttf",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "html/tabbar_ad.html",
+      "js/app.js"
+    ],
+    "refer": [
+      "html/tabbar_c.html"
+    ]
+  },
+  "html/forget_password.html": {
+    "resources": [
+      "html/login.html",
+      "css/style.css",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/login.html",
+      "html/tabbar_ad.html",
+      "html/tabbar_c.html"
+    ]
+  },
+  "html/search.html": {
+    "resources": [
+      "css/common.css",
+      "fonts/mui.ttf",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/app.js",
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "html/tabbar_ad.html",
+      "css/app.css",
+      "css/iconfont.css",
+      "images/new.png",
+      "images/iconfont-tianjia.png"
+    ],
+    "refer": [
+      "html/information.html",
+      "select.html",
+      "html/tabbar_ad.html"
+    ]
+  },
+  "html/notification.html": {
+    "resources": [
+      "fonts/mui.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/information.html"
+    ]
+  },
+  "html/change_password.html": {
+    "resources": [
+      "css/mui.picker.min.css",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/app.css",
+      "css/mui.min.css",
+      "html/tabbar_ad.html",
+      "fonts/mui.ttf",
+      "html/tabbar_c.html"
+    ],
+    "refer": [
+      "html/tabbar_ad.html"
+    ]
+  },
+  "html/pullrefresh_main.html": {
+    "resources": [
+      "html/pullrefresh_sub.html",
+      "fonts/mui.ttf",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "html/tabbar_ad.html",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "html/new_search.html"
+    ],
+    "refer": [
+      "html/pullrefresh_sub.html",
+      "html/tabbar_ad.html",
+      "html/tags_main.html",
+      "html/new_search.html"
+    ]
+  },
+  "html/pullrefresh_sub.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/mui.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "html/tags.html",
+      "html/tags_main.html"
+    ]
+  },
+  "html/tab-webview-main.html": {
+    "resources": [
+      "css/iconfont.css",
+      "html/tab-webview-subpage-task.html",
+      "fonts/iconfont.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "html/task_clerk.html",
+      "html/task_vendor.html",
+      "fonts/mui.ttf"
+    ],
+    "refer": [
+      "html/tab-webview-subpage-setting.html",
+      "html/tab-webview-subpage-notification.html",
+      "html/tab-webview-subpage-task.html",
+      "html/task_clerk.html",
+      "html/task_vendor.html",
+      "html/fabu.html",
+      "html/pullrefresh_main.html",
+      "html/notification.html",
+      "html/new_tag.html"
+    ]
+  },
+  "html/tab-webview-subpage-task.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "html/tab-webview-subpage-notification.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/notification.html"
+    ]
+  },
+  "html/tab-webview-subpage-setting.html": {
+    "resources": [
+      "html/admin.html",
+      "html/change_password.html",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/app.js",
+      "js/mui.min.js"
+    ],
+    "refer": [
+      "html/admin.html",
+      "html/clerk.html",
+      "html/vendor.html",
+      "select.html",
+      "html/change_password.html",
+      "html/about_us.html"
+    ]
+  },
+  "html/task_clerk.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/bg.jpg"
+    ],
+    "refer": [
+      "html/information.html",
+      "html/slider.html"
+    ]
+  },
+  "html/clerk.html": {
+    "resources": [
+      "js/mui.picker.js",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css",
+      "js/city.data-3.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/mui.picker.min.js",
+      "css/mui.picker.min.css"
+    ],
+    "refer": [
+      "html/tabbar_ad.html",
+      "html/tabbar_c.html",
+      "html/tab-webview-main.html",
+      "html/tags_main.html"
+    ]
+  },
+  "html/task_vendor.html": {
+    "resources": [
+      "js/mui.pullToRefresh.js",
+      "js/mui.pullToRefresh.material.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "images/bg.jpg"
+    ],
+    "refer": [
+      "html/information.html"
+    ]
+  },
+  "html/vendor.html": {
+    "resources": [
+      "css/common.css",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/tab-webview-main.html"
+    ]
+  },
+  "html/create_clerk.html": {
+    "resources": [
+      "js/mui.picker.min.js",
+      "css/common.css",
+      "js/mui.poppicker.js",
+      "css/mui.picker.min.css",
+      "css/mui.picker.css",
+      "js/city.data-3.js",
+      "fonts/mui.ttf",
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/tab-webview-main.html",
+      "html/tags_main.html"
+    ]
+  },
+  "html/create_vendor.html": {
+    "refer": [
+      "html/tab-webview-main.html"
+    ],
+    "resources": [
+      "js/app.js",
+      "css/common.css",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ]
+  },
+  "html/tags.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": []
+  },
+  "html/tags_main.html": {
+    "resources": [
+      "html/tags_sub.html",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/tags_sub.html"
+    ]
+  },
+  "html/tags_sub.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.picker.min.js",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "css/mui.poppicker.css",
+      "css/mui.picker.css"
+    ],
+    "refer": []
+  },
+  "html/new_tag.html": {
+    "resources": [
+      "/js/app.js",
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "html/new_tag.html"
+    ],
+    "refer": [
+      "html/pullrefresh_main.html",
+      "html/new_tag.html"
+    ]
+  },
+  "html/new_search.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "css/mui.min.css"
+    ],
+    "refer": [
+      "html/information.html"
+    ]
+  }
+}

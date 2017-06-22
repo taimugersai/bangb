@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello MUI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="stylesheet" href="../css/mui.min.css">
+    <style>
+        html,
+        body {
+            background-color: #efeff4;
+        }
+
+        .title {
+            margin: 20px 15px 10px;
+            color: #6d6d72;
+            font-size: 15px;
+        }
+
+        .mui-content img {
+            width: 20%;
+            height: 50%;
+        }
+    </style>
+</head>
+
+<body>
+<!--<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">设置</h1>
+</header>-->
+<div class="mui-content">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell mui-media">
+            <a class="mui-navigate-right" id="account">
+                <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
+                <div class="mui-media-body" id='name'>
+                </div>
+            </a>
+        </li>
+
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right">
+                新消息通知
+            </a>
+            <div class="mui-switch mui-active mui-switch-mini" id="mySwitch">
+                <div class="mui-switch-handle"></div>
+            </div>
+        </li>
+        <li class="mui-table-view-cell" style="display: none" id="accept">
+            <a class="mui-navigate-right">
+                是否接单
+            </a>
+            <div class="mui-switch mui-active mui-switch-mini" id="acceptSwitch">
+                <div class="mui-switch-handle"></div>
+            </div>
+        </li>
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right" id="change">
+                修改密码
+            </a>
+        </li>
+        <li class="mui-table-view-cell">
+            <a class="mui-navigate-right" id="about">
+                关于我们
+            </a>
+        </li>
+    </ul>
+    <!--	<ul class="mui-table-view" style="margin-top: 25px;">
+            <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">
+                    关于棒棒兼职
+                </a>
+            </li>
+        </ul>-->
+    <ul class="mui-table-view" style="margin-top: 25px;">
+        <li class="mui-table-view-cell">
+            <a id='logout' style="text-align: center;color: #FF3B30;">
+                退出登录
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+<script src="../js/mui.min.js"></script>
+<script src="../js/app.js"></script>
+<script>
+    mui.init();
+    mui.plusReady(function () {
+        if (localStorage.getItem('notify')) {
+            if (localStorage.getItem('notify') == 0) {
+                mui("#mySwitch").switch().toggle();
+                plus.push.setAutoNotification(false);
+            }
+        } else {
+            localStorage.setItem('notify', 1);
+        }
+        var user = JSON.parse(localStorage.getItem('user'));
+        var type = localStorage.getItem('type');
+        var accept = document.getElementById("accept");
+
+        document.getElementById("mySwitch").addEventListener("toggle", function (event) {
+            if (event.detail.isActive) {
+                localStorage.setItem('notify', 1);
+                plus.push.setAutoNotification(true);
+            } else {
+                localStorage.setItem('notify', 0);
+                plus.push.setAutoNotification(false);
+            }
+        });
+        if (type == 1) {
+            accept.style.display = 'block';
+            if (user.job_waiting == 0)
+                mui("#acceptSwitch").switch().toggle();
+            document.getElementById("acceptSwitch").addEventListener("toggle", function (event) {
+                var user;
+                if (event.detail.isActive) {
+                    user = {
+                        job_waiting: 1
+                    };
+                } else {
+                    user = {
+                        job_waiting: 0
+                    };
+                }
+                app.job_waiting(user);
+            });
+        }
+        document.getElementById("account").addEventListener('tap', function (event) {
+            mui.openWindow({
+                url: type == 0 ? 'vendor.html' : 'clerk.html',
+                id: type == 0 ? 'edit_vendor' : 'edit_clerk'
+            });
+        });
+        document.getElementById("change").addEventListener('tap', function (event) {
+            mui.openWindow({
+                url: 'change_password.html',
+                id: 'change_password'
+            });
+        });
+        document.getElementById("about").addEventListener('tap', function (event) {
+            mui.openWindow({
+                url: 'about_us.html',
+                id: 'about'
+            });
+        });
+
+
+        var logout = document.getElementById('logout');
+        logout.addEventListener('tap', function () {
+            app.clearUser();
+         /*   mui.openWindow({
+                url: '/select.html',
+                id: 'select',
+                show: {
+                    aniShow: 'pop-in'
+                }
+            });*/
+            var loginPage= plus.webview.getWebviewById('login');
+            var createPage=plus.webview.getWebviewById(type == 0 ? 'create_vendor' : 'create_clerk');
+            mui.fire(loginPage, 'close');
+            if(createPage!=null)
+                mui.fire(createPage, 'close');
+            var parentPage = plus.webview.getWebviewById(type == 0 ? 'vendor' : 'clerk');
+            mui.fire(parentPage, 'close');
+        });
+        var account = localStorage.getItem("account");
+        var avatar = document.getElementById('head-img');
+        var name = document.getElementById('name');
+        window.addEventListener('avatar', function (event) {
+            var user = JSON.parse(localStorage.getItem('user'));
+            avatar.src = user.avatar;
+        });
+        window.addEventListener('name', function (event) {
+            var user = JSON.parse(localStorage.getItem('user'));
+            name.innerText = user.name;
+        });
+        if (user.avatar) {
+            avatar.src = user.avatar;
+        }
+        if (user.name) {
+            name.innerText = user.name;
+        }
+    });
+</script>
+
+</html>

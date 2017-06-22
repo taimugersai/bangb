@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/mui.poppicker.js"></script>
+		<script src="../js/app.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link href="../css/mui.poppicker.css" rel="stylesheet" />
+		<style type="text/css">
+		
+		</style>
+	</head>
+
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll">
+
+			<form class="mui-input-group" id="list">
+
+			</form>
+		</div>
+		</div>
+				<script>
+			var page = 1;
+			var data;
+			var tags1=new Array();
+			var list;
+			var searchPage,clerkPage,createClerkPage,createPage;
+			window.addEventListener('confirm', function(event) {
+			    if(searchPage!=null)
+				mui.fire(searchPage,'tags',{
+                    tags:tags1
+                });
+			    if(clerkPage!=null)
+                mui.fire(clerkPage,'tags',{
+                    tags:tags1
+                });
+			    if(createClerkPage!=null)
+                mui.fire(createClerkPage,'tags',{
+                    tags:tags1
+                });
+                if(createPage!=null)
+                    mui.fire(createPage,'tags',{
+                        tags:tags1
+                    });
+                mui.back();
+			});
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			/**
+
+			 * 下拉刷新具体业务实现
+
+			 */
+
+			function getList(tags) {
+				var html = '';
+				tags.forEach(function(value, index, array) {
+					html += '<div class="mui-input-row mui-checkbox"> '+
+						'<label>' + value.name + '</label>' +
+						'<input name=' + value.name + ' value=' + index+ ' type="checkbox" >' +
+						'</div>';
+				});
+				return html;
+			}
+			(function($, doc) {
+				$.init();
+				$.ready(function() {
+					list = doc.getElementById('list');
+				    getTags(1);
+                    mui('.mui-input-group').on('change', 'input', function() {
+                        if(this.checked)
+                            tags1.push(data[this.value]);
+                        else
+                            removeByValue(tags1,data[this.value]);
+                    });
+				});
+				$.plusReady(function(){
+                    searchPage = plus.webview.getWebviewById("pullrefresh_sub.html");
+                    clerkPage=plus.webview.getWebviewById("edit_clerk");
+                    createClerkPage=plus.webview.getWebviewById('create_clerk');
+                    createPage=plus.webview.getWebviewById("fabu");
+				});
+			})(mui, document);
+
+			function pulldownRefresh() {
+					getTags(1);
+			}
+
+			/**
+
+			 * 上拉加载具体业务实现
+
+			 */
+			function pullupRefresh() {
+					getTags(page + 1);
+			}
+			function getTags(p) {
+				app.getTags(p, function(tags) {
+					if(p == 1) {
+					    tags1=new Array();
+						data =tags;
+						list.innerHTML = getList(tags);
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+					}
+					if(p - page == 1) {
+						data.push(tags);
+						list.innerHTML += getList(tags);
+						mui('#pullrefresh').pullRefresh().endPullupToRefresh(tags.length==0);
+					}
+					page = p;					
+				}, function(error) {
+					if(error == 'Unauthorized') {
+						localStorage.removeItem('user');
+						mui.openWindow({
+							url: '/select.html',
+							id: 'select',
+							show: {
+								aniShow: 'pop-in'
+							}
+						});
+					} else {
+						if(p - page == 1)
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+						if(p == 1)
+							mui('#pullrefresh').pullRefresh().endPulldownToRefresh();
+					}
+				});
+			}
+            function removeByValue(arr, val) {
+                for(var i=0; i<arr.length; i++) {
+                    if(arr[i] == val) {
+                        arr.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+		</script>
+	</body>
+</html>

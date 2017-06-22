@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+		<style type="text/css">
+			.content {
+				margin-top: 47px;
+				padding: 15px;
+			}
+			
+			.mui-btn-blue {
+				width: 80%;
+				margin: auto;
+				margin-top: 50px;
+			}
+			
+			.mui-input-row {
+				background-color: #fff;
+			}
+			.mui-input-row label{
+				text-align: left;
+			}
+			.mui-input-row .category {
+				width: 58%;
+				height: 100%;
+				border: none;
+				padding: 0;
+			}
+			#file{
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+				display:block;
+			}
+		</style>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">完善资料</h1>
+		</header>
+		<div class="content">
+			<div class="mui-input-row">
+				<label>公司名称</label>
+				<textarea id="name" rows="1" placeholder="请输入内容"></textarea>
+			</div>
+			<div class="mui-input-row">
+				<label>联系人</label>
+				<input id="comporation" type="text" class="mui-input-clear" placeholder="请输入内容">
+			</div>
+			<div class="mui-input-row">
+				<label>联系电话</label>
+				<input id="mobile" type="text" class="mui-input-clear" placeholder="请输入内容">
+			</div>
+			<div class="mui-input-row">
+				<label>公司地址</label>
+				<textarea id="address" rows="1" placeholder="请输入内容"></textarea>
+			</div>
+			<div class="mui-input-row">
+				<label>公司简介</label>
+				<textarea id="introduce" rows="3" placeholder="请输入内容"></textarea>
+			</div>
+			  <div class="mui-input-row area">
+					<label>头像</label>
+					<a id="file" class="btn mui-btn mui-btn-block data category">选择头像</a>
+				</div>
+			<a><button type="button" class="mui-btn mui-btn-blue mui-btn-block" id="confirm">确认</button></a>
+		</div>
+		<script src="../js/app.js"></script>
+		<script>
+            window.addEventListener('close',function(){
+                plus.webview.currentWebview().close();
+            });
+			var setting, vendor;
+			(function($, doc) {
+				$.init();
+                $.back = function() {
+                    var regPage = plus.webview.getWebviewById('reg');
+                    $.fire(regPage, 'close');
+                    plus.webview.currentWebview().close();
+                };
+				$.back = function() {
+						mui.openWindow({
+							url: 'login.html',
+							id: 'login'
+						});
+					};
+				$.plusReady(function() {
+                    document.getElementById("file").addEventListener('tap',function () {
+                        var btnArray = [{title:"拍照"},{title:"相册选取"}];
+                        plus.nativeUI.actionSheet( {
+                            title:"选择照片",
+                            cancel:"取消",
+                            buttons:btnArray
+                        }, function(e){
+                            var index = e.index;
+                            switch (index){
+                                case 0:
+
+                                    break;
+                                case 1:
+                                    appendByCamera();
+                                    break;
+                                case 2:
+                                    appendByGallery();
+                                    break;
+                            }
+
+                        } );
+                    });
+					setting = plus.webview.getWebviewById('tab-webview-subpage-setting.html');
+					var name = doc.getElementById('name');
+					var comporation = doc.getElementById('comporation');
+					var mobile = doc.getElementById('mobile');
+					var address = doc.getElementById('address');
+					var introduce = doc.getElementById('introduce');
+					var confirm = doc.getElementById('confirm');
+					confirm.addEventListener('tap', function(event) {
+						var user = {
+							name: name.value,
+							comporation: comporation.value,
+							mobile: mobile.value,
+							address: address.value,
+							introduce: introduce.value
+						};
+
+						app.updateVendor(user, function(err) {
+							if(err) {
+								plus.nativeUI.toast(err);
+								return;
+							}
+
+							upload();
+
+						});
+					});
+					var user = JSON.parse(localStorage.getItem('user'));
+					if(localStorage.getItem('user')!= null) {
+						name.value = user.name;
+						comporation.value = user.comporation;
+						mobile.value = user.mobile;
+						address.value = user.address;
+						introduce.value = user.introduce;
+					}
+				});
+			})(mui, document);
+			var server = "http://47.92.90.21/api/vendor/avatar";
+			var file;
+			// 上传文件
+			function upload() {
+				if(file == null) {
+					plus.nativeUI.toast('完善成功');
+                    mui.openWindow({
+							url: 'tab-webview-main.html',
+							id: 'vendor',
+							show: {
+								aniShow: 'pop-in'
+							}
+						});
+                    var regPage = plus.webview.getWebviewById('reg');
+                   mui.fire(regPage, 'close');
+					return;
+				}
+				var wt = plus.nativeUI.showWaiting();
+				var task = plus.uploader.createUpload(server, {
+						method: "POST"
+					},
+					function(t, status) { //上传完成
+						if(status == 200) {
+							plus.nativeUI.toast('完善成功');
+							localStorage.setItem('user', JSON.stringify(JSON.parse(t.responseText).data));
+							wt.close();
+									mui.openWindow({
+									url: 'tab-webview-main.html',
+									id: 'vendor',
+									show: {
+										aniShow: 'pop-in'
+									}
+								});
+                            var regPage = plus.webview.getWebviewById('reg');
+                            mui.fire(regPage, 'close');
+						} else {
+							plus.nativeUI.toast('上传失败');
+							wt.close();
+						}
+					}
+				);
+				var token = localStorage.getItem('token');
+				task.setRequestHeader("Authorization", 'bearer' + token);
+				task.addData("client", "HelloH5+");
+				task.addData("uid", getUid());
+				task.addFile(file.path, {
+					key: file.name
+				});
+
+				task.start();
+			}
+			// 拍照添加文件
+			function appendByCamera() {
+				plus.camera.getCamera().captureImage(function(p) {
+					appendFile(p);
+				});
+			}
+			// 从相册添加文件
+			function appendByGallery() {
+				plus.gallery.pick(function(p) {
+					appendFile(p);
+				});
+			}
+
+			function appendFile(p) {
+				var li = document.getElementById("file");
+				var n = p.substr(p.lastIndexOf('/') + 1);
+				li.innerText = n;
+				file = {
+					name: "avatar",
+					path: p
+				};
+				li.style.display = "inline";
+			}
+			// 产生一个随机数
+			function getUid() {
+				return Math.floor(Math.random() * 100000000 + 10000000).toString();
+			}
+		</script>
+	</body>
+
+</html>

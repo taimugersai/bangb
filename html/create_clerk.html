@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="../css/mui.picker.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+		<style type="text/css">
+			.content {
+				margin-top: 50px
+			}
+			
+			.radio {
+				line-height: 40px;
+			}
+			
+			.btn1 {
+				width: 80%;
+				margin: auto;
+				margin-top: 50px;
+			}
+			
+			#showCityPicker3 {
+				width: 58%;
+				height: 100%;
+				margin: auto;
+			}
+			
+			#cityResult3 {
+				position: absolute;
+				left: 42%;
+			}
+			
+			.mui-checkbox {
+				float: left;
+				width: 30%
+			}
+			
+			.mui-checkbox span {
+				line-height: 40px;
+			}
+			
+			.area {
+				background-color: #fff;
+			}
+			
+			.mui-input-row label {
+				width: 42%
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 58%;
+			}
+			
+			.mui-input-row .category {
+				width: 58%;
+				height: 100%;
+				border: none;
+				padding: 0;
+			}
+			
+			#userResult {
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+			}
+			
+			#head-img {
+				width: 42px;
+				height: 42px;
+				text-align: center;
+			}
+			
+			.ui-alert {
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+			}
+			
+			.mui-input-group .textarea {
+				height: 100px
+			}
+			
+			.mui-input-row label {
+				width: 42%;
+				text-align: left;
+			}
+			
+			.mui-input-row label~input,
+			.mui-input-row label~select,
+			.mui-input-row label~textarea {
+				width: 58%;
+			}
+			
+			.mui-input-row .category {
+				width: 58%;
+				height: 100%;
+				border: none;
+				padding: 0;
+			}
+			#type{
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+			}
+			#file{
+				text-align: left;
+				font-size: 16px;
+				line-height: 40px;
+				display:block;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">完善资料</h1>
+		</header>
+		<div class="content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>姓名</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入内容" id="name">
+				</div>
+				<div class="mui-input-row">
+					<label>性别</label>
+					<div class="radio" align="left">
+						<input name="gender" type="radio" value="male" checked="">男
+						<input name="gender" type="radio" value="female">女
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label>手机号码</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入内容" id="mobile">
+				</div>
+				<div class="mui-input-row">
+					<label>期望兼职类别</label>
+					<a id="type" class="btn mui-btn mui-btn-block data category">
+					</a>
+				</div>
+				<div class="mui-input-row">
+					<label>专业技能</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入内容" id="skill">
+				</div>
+				<div class="mui-input-row area">
+					<label>区域</label>
+					<div id='cityResult3' class="ui-alert">
+					</div>
+					<input id='showCityPicker3' class="btn" type='button'>
+				</div>
+				<div class="mui-input-row area">
+					<label>生日</label>
+					<a id='demo1' class="btn mui-btn mui-btn-block data category" data-options='{"type":"date","beginYear":1992,"endYear":2017}'>
+						<div id='result' class="ui-alert"></div>
+					</a>
+				</div>
+		        <div class="mui-input-row area">
+					<label>头像</label>
+					<a id="file" class="btn mui-btn mui-btn-block data category">选择头像</a>
+				</div>
+			</form>
+			<a><button type="button" class="mui-btn mui-btn-blue mui-btn-block btn1" id="confirm">确认</button></a>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.picker.min.js"></script>
+	<script src="../js/mui.poppicker.js"></script>
+	<script src="../js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/app.js"></script>
+	<script>
+        window.addEventListener('close',function(){
+            plus.webview.currentWebview().close();
+        });
+		var setting, clerk,type,tag;
+        window.addEventListener('tags', function (event) {
+            var tags = event.detail.tags;
+            if (tags != null) {
+                var types = '';
+                tag='';
+                tags.forEach(function (value, index, array) {
+                    types += value.name + ' ';
+                    if(index==tags.length-1)
+                        tag+=value.slug;
+                    else tag+=value.slug+',';
+                });
+                type.innerText = types;
+            }
+        });
+		(function($, doc) {
+			$.init();
+				$.back = function() {
+                    var regPage = plus.webview.getWebviewById('reg');
+                    $.fire(regPage, 'close');
+                    plus.webview.currentWebview().close();
+				};
+			$.ready(function() {
+				var userPicker = new $.PopPicker();
+				var data = new Array();
+				app.getTags(function(tags) {
+					tags.forEach(function(value, index, array) {
+						data[index] = {
+							text: value.name,
+							slug: value.slug
+						};
+					});
+					userPicker.setData(data);
+				}, function() {});
+				var result = $('#result')[0];
+				var demo1 = doc.getElementById('demo1');
+				demo1.addEventListener('tap', function() {
+					var optionsJson = this.getAttribute('data-options') || '{}';
+					var options = JSON.parse(optionsJson);
+					var id = this.getAttribute('id');
+					/*
+					 * 首次显示时实例化组件
+					 * 示例为了简洁，将 options 放在了按钮的 dom 上
+					 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+					 */
+					var myDate = new Date();
+
+					var beginDate = myDate.getFullYear() - 25;
+					var endDate = myDate.getFullYear() - 16;
+					var picker = new mui.DtPicker({
+						type: "date", //设置日历初始视图模式 
+						beginYear: beginDate, //设置开始日期 
+						endYear: endDate, //设置结束日期 
+					});
+
+					picker.show(function(rs) {
+						/*
+						 * rs.value 拼合后的 value
+						 * rs.text 拼合后的 text
+						 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+						 * rs.m 月，用法同年
+						 * rs.d 日，用法同年
+						 * rs.h 时，用法同年
+						 * rs.i 分（minutes 的第二个字母），用法同年
+						 */
+
+						result.innerText = rs.text;
+
+						/* 
+						 * 返回 false 可以阻止选择框的关闭
+						 * return false;
+						 */
+						/*
+						 * 释放组件资源，释放后将将不能再操作组件
+						 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+						 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+						 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+						 */
+						picker.dispose();
+
+					});
+				}, false);
+
+                type=doc.getElementById('type');
+                type.addEventListener('tap',function () {
+                    mui.openWindow({
+                        url: 'tags_main.html',
+                        id: 'tags_main',
+                        show: {
+                            aniShow: 'pop-in'
+                        }
+                    });
+                });
+				//三级选择器
+				var cityPicker3 = new $.PopPicker({
+					layer: 3
+				});
+				cityPicker3.setData(cityData3);
+				var showCityPickerButton = doc.getElementById('showCityPicker3');
+				var cityResult3 = doc.getElementById('cityResult3');
+				showCityPickerButton.addEventListener('tap', function(event) {
+					cityPicker3.show(function(items) {
+						cityResult3.innerText = (items[0] || {}).text + " " + (items[1] || {}).text + " " + (items[2] || {}).text;
+						//返回 false 可以阻止选择框的关闭
+						//return false;
+					});
+				}, false);
+				var confirm = doc.getElementById('confirm');
+				var name = doc.getElementById('name');
+				var mobile = doc.getElementById('mobile');
+				var genders = doc.getElementsByName('gender');
+				var gender;
+				var birthday = doc.getElementById('result');
+                var skill=doc.getElementById('skill');
+				confirm.addEventListener('tap', function(event) {
+					for(var i = 0; i < genders.length; i++) {
+						if(genders[i].checked == true) {
+							gender = genders[i].value;
+						}
+					}
+					var user = {
+						name: name.value,
+						tag: tag,
+						address: cityResult3.innerText,
+						mobile: mobile.value,
+						gender: gender,
+						birthday: birthday.innerText,
+						skill:skill.value
+					};
+					app.updateClerk(user, function(err) {
+						if(err) {
+							plus.nativeUI.toast(err);
+							return;
+						}
+                       upload();
+					});
+				});
+			});
+			$.plusReady(function() {
+				setting = plus.webview.getWebviewById('tab-webview-subpage-setting.html');
+				clerk = plus.webview.getWebviewById('task_clerk.html');
+				 document.getElementById("file").addEventListener('tap',function () {
+                    var btnArray = [{title:"拍照"},{title:"相册选取"}];
+                    plus.nativeUI.actionSheet( {
+                        title:"选择照片",
+                        cancel:"取消",
+                        buttons:btnArray
+                    }, function(e){
+                        var index = e.index;
+                        switch (index){
+                            case 0:
+
+                                break;
+                            case 1:
+                                appendByCamera();
+                                break;
+                            case 2:
+                                appendByGallery();
+                                break;
+                        }
+
+                    } );
+                });
+			});
+
+		})(mui, document);
+		var server = "http://47.92.90.21/api/clerk/avatar";
+		var file;
+		// 上传文件
+		function upload() {
+			if(file == null) {
+				plus.nativeUI.toast('完善成功');
+                mui.openWindow({
+							url: 'tab-webview-main.html',
+							id: 'clerk',
+							show: {
+								aniShow: 'pop-in'
+							}
+						});
+                var regPage = plus.webview.getWebviewById('reg');
+                mui.fire(regPage, 'close');
+				return;
+			}
+			var wt = plus.nativeUI.showWaiting();
+			var task = plus.uploader.createUpload(server, {
+					method: "POST"
+				},
+				function(t, status) { //上传完成
+					if(status == 200) {
+						localStorage.setItem('user', JSON.stringify(JSON.parse(t.responseText).data));
+						plus.nativeUI.toast('完善成功');
+						wt.close();					
+						mui.openWindow({
+							url: 'tab-webview-main.html',
+							id: 'clerk',
+							show: {
+								aniShow: 'pop-in'
+							}
+						});
+                        var regPage = plus.webview.getWebviewById('reg');
+                        mui.fire(regPage, 'close');
+                            } else {
+						plus.nativeUI.toast('上传失败');
+						wt.close();
+					}
+				}
+			);
+			var token = localStorage.getItem('token');
+			task.setRequestHeader("Authorization", 'bearer' + token);
+			task.addData("client", "HelloH5+");
+			task.addData("uid", getUid());
+			task.addFile(file.path, {
+				key: file.name
+			});
+			task.start();
+
+		}
+		// 拍照添加文件
+		function appendByCamera() {
+			plus.camera.getCamera().captureImage(function(p) {
+				appendFile(p);
+			});
+		}
+		// 从相册添加文件
+		function appendByGallery() {
+			plus.gallery.pick(function(p) {
+				appendFile(p);
+			});
+		}
+
+		function appendFile(p) {
+			var li = document.getElementById("file");
+			var n = p.substr(p.lastIndexOf('/') + 1);
+			li.innerText = n;
+			file = {
+				name: "avatar",
+				path: p
+			};
+			li.style.display = "inline";
+		}
+		// 产生一个随机数
+		function getUid() {
+			return Math.floor(Math.random() * 100000000 + 10000000).toString();
+		}
+	</script>
+
+</html>

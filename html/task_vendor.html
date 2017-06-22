@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-bar~.mui-content .mui-fullscreen {
+				top: 44px;
+				height: auto;
+			}
+			
+			.mui-pull-top-tips {
+				position: absolute;
+				top: -20px;
+				left: 50%;
+				margin-left: -25px;
+				width: 40px;
+				height: 40px;
+				border-radius: 100%;
+				z-index: 1;
+			}
+			
+			.mui-bar~.mui-pull-top-tips {
+				top: 24px;
+			}
+			
+			.mui-pull-top-wrapper {
+				width: 42px;
+				height: 42px;
+				display: block;
+				text-align: center;
+				background-color: #efeff4;
+				border: 1px solid #ddd;
+				border-radius: 25px;
+				background-clip: padding-box;
+				box-shadow: 0 4px 10px #bbb;
+				overflow: hidden;
+			}
+			
+			.mui-pull-top-tips.mui-transitioning {
+				-webkit-transition-duration: 200ms;
+				transition-duration: 200ms;
+			}
+			
+			.mui-pull-top-tips .mui-pull-loading {
+				/*-webkit-backface-visibility: hidden;
+				-webkit-transition-duration: 400ms;
+				transition-duration: 400ms;*/
+				margin: 0;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon,
+			.mui-pull-top-wrapper .mui-spinner {
+				margin-top: 7px;
+			}
+			
+			.mui-pull-top-wrapper .mui-icon.mui-reverse {
+				/*-webkit-transform: rotate(180deg) translateZ(0);*/
+			}
+			
+			.mui-pull-bottom-tips {
+				text-align: center;
+				background-color: #efeff4;
+				font-size: 15px;
+				line-height: 40px;
+				color: #777;
+			}
+			
+			.mui-pull-top-canvas {
+				overflow: hidden;
+				background-color: #fafafa;
+				border-radius: 40px;
+				box-shadow: 0 4px 10px #bbb;
+				width: 40px;
+				height: 40px;
+				margin: 0 auto;
+			}
+			
+			.mui-pull-top-canvas canvas {
+				width: 40px;
+			}
+			
+			.mui-slider-indicator.mui-segmented-control {
+				background-color: #efeff4;
+			}
+			
+			.mui-card .mui-content {
+				padding: 10px;
+			}
+			
+			.mui-slider .mui-slider-group .mui-slider-item .mui-scroll img {
+				width: 34px;
+				height:34px;
+			}
+			#slider0{
+				height: 120px;
+			}
+			#slider{
+				margin-top: 120px;
+			}
+				ul, ol, li {
+				list-style: none;
+			}
+			.product-info {
+				padding: 12px;
+				overflow: hidden;
+			}
+			.mod-list-info {
+				display: block;
+			}
+			a {
+				color: #404040;
+			}
+			a {
+				text-decoration: none;
+			}
+			h3 {
+				display: block;
+				font-size: 1.17em;
+				-webkit-margin-before: 1em;
+				-webkit-margin-after: 1em;
+				-webkit-margin-start: 0px;
+				-webkit-margin-end: 0px;
+				font-weight: bold;
+			}
+			.product-meta {
+				margin-top: 2px;
+			}
+			.product-meta {
+				font-size: 12px;
+				line-height: 20px;
+				overflow: hidden;
+			}
+			.product-meta b {
+				float: left;
+				font-size: 18px;
+				font-weight: 700;
+				margin-right: 4px;
+				margin-top: -0.5px;
+			}
+			.product-meta span.fl:not(:last-child) {
+				margin-right: 8px;
+			}
+			.fl {
+				float: left;
+			}
+			.fc-gray {
+				color: #808080;
+			}
+			.fc-red {
+				color: #f60;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+				<div id="slider0" class="mui-slider" >
+			  <div class="mui-slider-group" id="image">
+			  </div>
+			  <div class="mui-slider-indicator" id="indicator">
+			  </div>
+			</div>
+			<div id="slider" class="mui-slider mui-fullscreen">
+				<div style="padding: 10px 10px;">
+					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+						<div  class="mui-scroll" style="width: 100%;">
+						<a class="mui-control-item mui-active" href="#item1mobile">
+							审核中
+						</a>
+						<a class="mui-control-item" href="#item2mobile">
+							进行中
+						</a>
+						<a class="mui-control-item" href="#item3mobile">
+							已结束
+						</a>
+					</div>
+					</div>
+				</div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id='list1'>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id='list2'>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view" id='list3'>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/mui.pullToRefresh.js"></script>
+	<script src="../js/mui.pullToRefresh.material.js"></script>
+	<script src="../js/app.js"></script>
+	<script>
+		var gallery = mui('#slider0');
+			gallery.slider({
+			  interval:3000//自动轮播周期，若为0则不自动播放，默认为0；
+			});
+		var tasks1 = new Array(),
+			tasks2 = new Array(),
+			tasks3 = new Array();
+		var page1 = 1,
+			page2 = 1,
+			page3 = 1;
+			var list1,list2,list3;
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+					$(pullRefreshEl).pullToRefresh({
+						down: {
+							callback: function() {
+								var self = this;
+								/*setTimeout(function() {
+									var ul = self.element.querySelector('.mui-table-view');
+									ul.insertBefore(createFragment(ul, index, 10, true), ul.firstChild);
+									self.endPullDownToRefresh();
+								}, 1000);*/
+
+								switch(index) {
+									case 0:
+										app.getFilterTasks('begin', 1, function(tasks) {
+											page1 = 1;
+											tasks1 = tasks;
+											list1.innerHTML = getList('审核',tasks);
+											self.endPullDownToRefresh();
+										}, function(error) {
+											self.endPullDownToRefresh();
+											isUnauthorized(error);
+										});
+										break;
+									case 1:
+										app.getFilterTasks('ok', 1, function(tasks) {
+											page2 = 1;
+											tasks2 = tasks;
+											list2.innerHTML = getList('进行',tasks);
+											self.endPullDownToRefresh();
+										}, function() {
+											self.endPullDownToRefresh();
+											isUnauthorized(error);
+										});
+										break;
+										case 2:
+										app.getFilterTasks('end', 1, function(tasks) {
+											page3 = 1;
+											tasks3 = tasks;
+											list3.innerHTML = getList('结束',tasks);
+											self.endPullDownToRefresh();
+										}, function() {
+											self.endPullDownToRefresh();
+											isUnauthorized(error);
+										});
+										break;
+								}
+
+							}
+						},
+						up: {
+							callback: function() {
+								var self = this;
+								/*setTimeout(function() {
+									var ul = self.element.querySelector('.mui-table-view');
+									ul.appendChild(createFragment(ul, index, 5));
+									self.endPullUpToRefresh();
+								}, 1000);*/
+								switch(index) {
+									case 0:
+										app.getFilterTasks('begin', page1 + 1, function(tasks) {
+											if(tasks.length > 0) {
+												page1 += 1;
+												tasks1.push(tasks);
+												list1.innerHTML = list1.innerHTML + getList('审核',tasks);
+											}
+											self.endPullUpToRefresh();
+										}, function(error) {
+											self.endPullUpToRefresh();
+											isUnauthorized(error);
+										});
+										break;
+									case 1:
+										app.getFilterTasks('ok', page2 + 1, function(tasks) {
+											if(tasks.length > 0) {
+												page2 += 1;
+												tasks2.push(tasks);
+												list2.innerHTML = list2.innerHTML + getList('进行',tasks);
+											}
+											self.endPullUpToRefresh();
+										}, function() {
+											self.endPullUpToRefresh();
+											isUnauthorized(error);
+										});
+										break;
+										case 2:
+										app.getFilterTasks('end', page3 + 1, function(tasks) {
+											if(tasks.length > 0) {
+												page3 += 1;
+												tasks3.push(tasks);
+												list3.innerHTML = list3.innerHTML + getList('结束',tasks);
+											}
+											self.endPullUpToRefresh();
+										}, function() {
+											self.endPullUpToRefresh();
+											isUnauthorized(error);
+										});
+										break;
+								}
+							}
+						}
+					});
+				});
+			});
+			$.plusReady(function() {
+                app.getImages(function (images) {
+                    var image=document.getElementById('image');
+                    var indicator=document.getElementById('indicator');
+                    images.forEach(function(value, index, array) {
+                        image.innerHTML+='<div class="mui-slider-item">'
+                            +'<a href="#" data-url='+value.url+'>'
+                            +'<img src='+value.image+'>'
+                            +'</a>'
+                            +'</div>';
+                        if(index==0)
+                            indicator.innerHTML+='<div class="mui-indicator mui-active"></div>'
+                        else  indicator.innerHTML+='<div class="mui-indicator"></div>'
+                    });
+                    gallery.slider({
+                        interval:3000//自动轮播周期，若为0则不自动播放，默认为0；
+                    });
+                });
+				list1 = document.getElementById('list1');
+				getList1();
+				$('#list1').on('tap', 'li', function() {
+					var task = app.getTask(this.getAttribute('data-guid'), tasks1);
+					$.openWindow({
+						url: 'information.html',
+						id: 'information',
+						extras: {
+							task: task
+						}
+					});
+				});
+				list2 = document.getElementById('list2');
+				getList2();
+				$('#list2').on('tap', 'li', function() {
+					var task = app.getTask(this.getAttribute('data-guid'), tasks2);
+					$.openWindow({
+						url: 'information.html',
+						id: 'information',
+						extras: {
+							task: task
+						}
+					});
+				});
+				list3 = document.getElementById('list3');
+				getList3();
+				$('#list3').on('tap', 'li', function() {
+					var task = app.getTask(this.getAttribute('data-guid'), tasks2);
+					$.openWindow({
+						url: 'information.html',
+						id: 'information',
+						extras: {
+							task: task
+						}
+					});
+				});
+                $('#image').on('tap','a',function(){
+                    localStorage.setItem('slider',this.getAttribute('data-url'));
+                    $.openWindow({
+                        url: 'slider.html',
+                        id: 'slider'
+                    });
+                });
+			});
+			window.addEventListener('refresh_task',function(){
+				page1=1;
+				getList1();
+			});
+		}(mui, document));
+		function getList1() {
+			app.getFilterTasks('begin', 1, function(tasks) {
+				tasks1 = tasks;
+				list1.innerHTML = getList('审核', tasks);
+			}, function(error) {
+		    isUnauthorized(error);
+			});
+		}
+
+		function getList2() {
+			app.getFilterTasks('ok', 1, function(tasks) {
+				tasks2 = tasks;
+				list2.innerHTML = getList('进行', tasks);
+			}, function() {
+
+			});
+		}
+
+		function getList3() {
+			app.getFilterTasks('end', 1, function(tasks) {
+				tasks3 = tasks;
+				list3.innerHTML = getList('结束', tasks);
+			}, function() {
+
+			});
+		}
+		function getList(status, tasks) {
+			var html = '';
+			tasks.forEach(function(value, index, array) {
+				var tags = value.tag;
+				var name = '';
+                if(tags.length > 0)
+                    tags.forEach(function(value,index,array){
+                        name+= tags[index].name+' ';
+                    });
+			/*	html += '<li class=\"mui-table-view-cell\" data-guid=\"' + value.id + '\">' +
+					'<div class=\"mui-card\">' +
+					'<div class="mui-card-header mui-card-media">' +
+					'<img src=\"' + value.img + '\" />' +
+					'<div class="mui-media-body">' +
+					'职位名称: ' + value.title +
+					'<p>招聘类别: ' + name + '</p>' +
+					'</div>' +
+					'</div>' +
+					'<div class=\"mui-card-footer\"><span>地区:</span>' + value.address + '</div>' +
+					'<div class=\"mui-card-footer\"><span>日期:</span>' + value.end_date + '</div>' +
+					'<div class=\"mui-card-footer\"><span>薪酬:</span>' + value.salary + '</div>' +
+					'<div class=\"mui-card-footer\">' +
+					'<span>' + value.real_count + '/' + value.demand_count + '</span>' +
+					'<span>' + status + '</span>' +
+					'</div>' +
+					'</div>' +
+					'</div>' +
+					'</li>';*/
+			   html+='<li class="mod-list-item com-border-bottom mui-table-view-cell" data-guid=\"' + value.id + '\">'
+                    +'<a href="/bj/jz_2791363.htm" class="product-info mod-list-info" data-dmalog="@atype=click@ca_source=m@ca_from=rqzw@ca_kw=1">'
+                    +'<h3 class="product-title"><span>'
+                    +value.title
+                    +'</span>'
+                    +'</h3>'
+                    +'<div class="product-meta">'
+                    +'<span class="fl fc-gray"><i class="icon icon-location-sm"></i>' + value.address + '</span>'
+                    +'<span class="fl fc-gray">'
+                    +'<i class="icon icon-date-sm"></i>'+(value.work_time==0?'长期':value.begin_date+'~'+app.AddDays(value.begin_date,value.work_time))
+                    +'</span>'
+                    +'</div>'
+                    +'<div class="product-meta">'
+                    +'<span class="fl"><b class="fc-red">'
+                    +value.salary+'</b>元/天'
+                    +'</span>'
+                    +'</div>'
+                    +'</a>'
+                    +'</li>'
+			});
+			return html;
+		}
+			function isUnauthorized(error) {
+			if(error == 'Unauthorized') {
+				plus.nativeUI.toast('验证过期请重新登录')
+			}
+		}
+        function AddDays(date,days){
+            var nd = new Date(date);
+            nd = nd.valueOf();
+            nd = nd + days * 24 * 60 * 60 * 1000;
+            nd = new Date(nd);
+            //alert(nd.getFullYear() + "年" + (nd.getMonth() + 1) + "月" + nd.getDate() + "日");
+            var y = nd.getFullYear();
+            var m = nd.getMonth()+1;
+            var d = nd.getDate();
+            if(m <= 9) m = "0"+m;
+            if(d <= 9) d = "0"+d;
+            var cdate = y+"-"+m+"-"+d;
+            return cdate;
+        }
+	</script>

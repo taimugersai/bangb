@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title></title>
+	<script src="js/mui.min.js"></script>
+	<script src="js/common.js"></script>
+	<link href="css/mui.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="css/style_index.css" />
+	<style type="text/css">
+		.content {
+			position: absolute;
+			width: 100%;
+			height: 100vh;
+			margin: 0 auto;
+			background: #ffffff;
+		}
+		.logo_box{
+			width: 7.5rem;
+			height: 5.9rem;
+			background: #FF5556;
+			padding-top: 2.13rem;
+		}
+		.logo_box div{
+			width: 1.83rem;
+			height: 1.83rem;
+			margin-left: 2.81rem;
+			background: #FFFFFF;
+			background-image: url(images/logo.png);
+			background-size: 100% 100%; 
+			border-radius: 6px;
+		}
+		.mui-btn-red{
+			width:3.88rem;
+			height: 0.94rem;
+			line-height: 0.94rem;
+			padding: 0;
+			background: #ff5556;
+			border:1px solid #FF5556;
+		}
+		.btn_02{
+			background: #ffffff;
+			color: #FF5556;
+		}
+		.btn_01{
+			margin-top: 1.41rem;
+			margin-bottom: 0.99rem;
+		}
+		
+	</style>
+
+	</head>
+
+	<body>
+		<!--<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">棒棒兼职</h1>
+		</header>-->
+		<div class="content">
+			<div class="logo_box">
+				<div></div>
+			</div>
+			<a><button type="button" class="mui-btn mui-btn-red  mui-btn-block btn_01" value="0">我要招聘</button></a>
+			<a><button type="button" class="mui-btn mui-btn-red mui-btn-block btn_02" value="1">我要兼职</button></a>
+		</div>
+	</body>
+	<script>
+		(function($, doc) {
+			$.init();
+			$.back = function() {};
+			$.plusReady(function() {
+				mui('.content').on('tap', "button", function(e) {
+					localStorage.setItem("type", this.value);
+					mui.openWindow({
+						url: '/html/login.html',
+						id: 'login',
+						extras:{
+									type:this.value
+								}
+					});
+				});
+			});
+		}(mui, document));
+	</script>
+
+</html>
