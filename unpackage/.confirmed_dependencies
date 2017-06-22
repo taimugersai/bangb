@@ -432,7 +432,10 @@
       "fonts/mui.ttf",
       "js/app.js",
       "js/mui.min.js",
-      "css/mui.min.css"
+      "css/mui.min.css",
+      "js/common.js",
+      "images/add.png",
+      "images/logo.png"
     ],
     "refer": [
       "html/tab-webview-main.html",
