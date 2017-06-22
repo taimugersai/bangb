@@ -125,6 +125,7 @@
 			background: #FFFFFF;
 			background-image: url(../images/logo.png);
 			background-size: 80% 80%; 
+			background-position:center;
 			background-repeat:no-repeat;
 			border-radius: 6px;
 		}
@@ -142,11 +143,21 @@
 		}
 		.mui-input{
 			padding-left: 1.09rem!important;
-			font-size: 0.2rem;
+			font-size: 0.28rem;
+			border-bottom: 0!important;
+			padding-top: 0.4rem!important;
+			padding-bottom: 0.3rem!important;
+			
 		}
-		.mui-icon-eye:before {
-		    content: '&#xe620';
-		    font-family: iconfont;
+		.mui-input-group .mui-input-row:after{
+			height: 0!important;
+		}
+		.mui-btn{
+			width: 6.45rem;
+			margin-left: 0.31rem;
+			margin-top: 0.47rem;
+			background: #ff5556;
+			border: 1px solid #ff5556;
 		}
 		</style>
 
@@ -168,12 +179,13 @@
 						<span class="iconfont">&#xe616;</span>
 						<input type="password" class="mui-input-password mui-input" placeholder="请输入密码" id='password'>
 					</div>
+					<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+					<div class="link-area">
+						<a id='reg'>注册账号</a> <span class="spliter">|</span>
+						<a id='forgetPassword' href="forget_password.html">忘记密码</a>
+					</div>
 				</form>
-				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
-				<div class="link-area">
-					<a id='reg'>注册账号</a> <span class="spliter">|</span>
-					<a id='forgetPassword' href="forget_password.html">忘记密码</a>
-				</div>
+				
 			</form>
 			
 		</div>
