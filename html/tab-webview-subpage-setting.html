@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
+    	<script src="../js/common.js"></script>
+	<link rel="stylesheet" href="../css/common.css" />
     <link rel="stylesheet" href="../css/mui.min.css">
     <style>
         html,
@@ -25,6 +26,105 @@
             width: 20%;
             height: 50%;
         }
+        .head_box{
+        	width: 7.5rem;
+        	height: 3.9rem;
+        	background-image: url(../images/head_bg.png);
+        	background-size: 100% 100%;
+        	padding-top: 0.67rem;
+        	overflow: hidden;
+        	
+        }
+        .head_box *{
+        	padding: 0;
+        	margin: 0;
+        }
+        .head_box .title_box{
+        	width: 7.5rem;
+        	height: 0.48rem;
+        	color: white;
+        }
+        .head_box .title_box .title{
+        	width: 6.17rem;
+        	margin-left: 0.7rem;
+        	text-align: center;
+        	font-size: 0.35rem;
+        	display: inline-block;
+        	color: white;
+        }
+        .head_box .info_box{
+        	width: 6.4rem;
+        	height: 1.84rem;
+        	background: rgba(255,182,182,.57);
+        	margin-left:1.11rem;
+        	margin-top:0.5rem;
+        }
+        .head_box .info_box .head-img{
+        	width: 1.84rem;
+        	height: 1.84rem;
+        	border-radius: 100%;
+        	margin-left: -0.92rem;
+        	display: inline-block;
+        }
+        .head_box .info_box .info_word_box{
+        	display: inline-block;
+        	width:4rem;
+        	height: 1.85rem;
+        	margin-left:0.3rem;
+        }
+        .head_box .info_box .info_word_box p{
+        	color: #fefefe;
+        	margin-bottom: 0.1rem;
+        	font-size: 0.23rem;
+        }
+        .head_box .info_box .info_word_box p:nth-child(1){
+        	margin-top: 0.22rem;
+        	margin-bottom: 0.2rem;
+        	font-size: 0.33rem;
+        }
+        .head_box .info_box .iconfont{
+        	display: inline-block;
+        	height: 1.85rem;
+        	width:1rem;
+        	text-align: center;
+        	line-height: 1.85rem;
+        	float: right;
+        	color: #fefefe;
+        	font-size: 0.49rem;
+        }
+        .mui-table-view {
+        	font-size: 0.32rem;
+        }
+        .mui-table-view .iconfont{
+        	font-size: 0.34rem;
+        	color:white;
+        	display: inline-block;
+        	width: 0.53rem;
+        	text-align: center;
+        	height: 0.53rem;
+        	line-height: 0.53rem;
+        	border-radius: 10px;
+        	margin-right: 0.28rem;
+        }
+        .mui-switch.mui-active {
+		    border-color: #ff5556;
+		    background-color: #ff5556;
+		}
+		#logout:after {
+		    right: 15px;
+		    content: '\e583';
+		    font-family: Muiicons;
+		    font-size: inherit;
+		    line-height: 1;
+		    position: absolute;
+		    top: 50%;
+		    display: inline-block;
+		    -webkit-transform: translateY(-50%);
+		    transform: translateY(-50%);
+		    text-decoration: none;
+		    color: #bbb;
+		    -webkit-font-smoothing: antialiased;
+		}
     </style>
 </head>
 
@@ -34,18 +134,33 @@
     <h1 class="mui-title">设置</h1>
 </header>-->
 <div class="mui-content">
-    <ul class="mui-table-view">
-        <li class="mui-table-view-cell mui-media">
+	<div class='head_box'>
+		<div class="title_box clear">
+			<span class="title">棒棒兼职</span>
+			<span class='iconfont add'>&#xe624;</span>
+		</div>
+		<div class="info_box">
+			<img class="mui-media-object mui-pull-left head-img" id="head-img" src=""/>
+			<div class="info_word_box">
+				<p id='name'></p>
+				<p>联系人：<span id="job"></span></p>
+				<p>联系电话：<span id='phone'></span></p>
+			</div>
+			<span class="iconfont">&#xe607;</span>
+		</div>
+	</div>
+    <ul class="mui-table-view" style="margin-top: 0.3rem;">
+        <!--<li class="mui-table-view-cell mui-media">
             <a class="mui-navigate-right" id="account">
                 <img class="mui-media-object mui-pull-left head-img" id="head-img" src="">
                 <div class="mui-media-body" id='name'>
                 </div>
             </a>
-        </li>
+        </li>-->
 
         <li class="mui-table-view-cell">
             <a class="mui-navigate-right">
-                新消息通知
+                <span class="iconfont" style="background: #84d5e9;">&#xe777;</span>新消息通知
             </a>
             <div class="mui-switch mui-active mui-switch-mini" id="mySwitch">
                 <div class="mui-switch-handle"></div>
@@ -61,12 +176,12 @@
         </li>
         <li class="mui-table-view-cell">
             <a class="mui-navigate-right" id="change">
-                修改密码
+                <span class="iconfont" style="background: #ffc55e;">&#xe61e;</span>修改密码
             </a>
         </li>
         <li class="mui-table-view-cell">
             <a class="mui-navigate-right" id="about">
-                关于我们
+                <span class="iconfont" style="background: #fe8dc1;line-height: 0.6rem;">&#xe630;</span>关于我们
             </a>
         </li>
     </ul>
@@ -78,9 +193,9 @@
             </li>
         </ul>-->
     <ul class="mui-table-view" style="margin-top: 25px;">
-        <li class="mui-table-view-cell">
-            <a id='logout' style="text-align: center;color: #FF3B30;">
-                退出登录
+        <li class="mui-table-view-cell logout">
+            <a id='logout'>
+                <span class="iconfont" style="background: #a6b9cc;">&#xe617;</span> 退出登录
             </a>
         </li>
     </ul>
@@ -171,6 +286,8 @@
         var account = localStorage.getItem("account");
         var avatar = document.getElementById('head-img');
         var name = document.getElementById('name');
+        var phone = document.getElementById('phone');
+        var job = document.getElementById('job');
         window.addEventListener('avatar', function (event) {
             var user = JSON.parse(localStorage.getItem('user'));
             avatar.src = user.avatar;
@@ -181,6 +298,12 @@
         });
         if (user.avatar) {
             avatar.src = user.avatar;
+        }
+        if (user.mobile) {
+            phone.innerText = user.mobile;
+        }
+        if (user.comporation) {
+            job.innerText = user.comporation;
         }
         if (user.name) {
             name.innerText = user.name;
